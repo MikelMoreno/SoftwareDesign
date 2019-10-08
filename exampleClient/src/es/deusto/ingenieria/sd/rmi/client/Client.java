@@ -20,7 +20,7 @@ public class Client {
 			System.out.println("* Message coming from the server: '" + stubServer.sayHello() + "'");
 			System.out.println("registering user");
 			stubServer.registerUser( "mikel",  "moreno" );
-			System.out.println("* Message coming from the server: '" + stubServer.sayMessage( "mikel", "moreno", "arriba espainia") + "'");
+			System.out.println("* Message coming from the server: '" + stubServer.sayMessage( "mikel", "moreno", "buenos dias mundo") + "'");
 			
 		} catch (Exception e) {
 			System.err.println("- Exception running the client: " + e.getMessage());
