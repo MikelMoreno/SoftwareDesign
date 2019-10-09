@@ -19,6 +19,7 @@ public class Client {
 		try {
 			String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 			IServer stubServer = (IServer) java.rmi.Naming.lookup(name);
+			
 			//here i start editing
 			String nombre, pass, message;
 			Scanner scan = new Scanner(System.in);
@@ -27,9 +28,9 @@ public class Client {
 			nombre = scan.next();
 			System.out.println("Please enter your password");
 			pass= scan.next();
-			System.out.println("registering user");
+			System.out.println("registering user please wait...");
 			stubServer.registerUser( nombre,  pass );
-			System.out.println("write a message");
+			System.out.println("please, write a message");
 			message = scan.next();
 			System.out.println("* Message coming from the server: '" + stubServer.sayMessage( nombre, pass, message) + "'");
 			//stop editing
