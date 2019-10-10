@@ -45,25 +45,24 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	//here i start editing
 	@Override
-	public String sayMessage(String login, String password, String message) throws RemoteException {
+	public String sayMessage(String login, String password, String message) throws RemoteException, UserException {
 		
-		if (this.clientPassword.get(login).equals(password)) {//if the username and password are correct, then returns the message
+		if (this.clientPassword.containsKey(login) && this.clientPassword.get(login).equals(password)) {//if the username and password are correct, then returns the message
 			return message;
-		}else if (!this.clientPassword.containsKey(login)) {//if the username does not exist
-			return "the username does not exist ";
-		}else {//if the password is not correct
-			return "the password is incorrect";
+		}else {//if the password is not correct or the username is incorrect
+			throw new UserException("the password is incorrect or the username does not exist");
 		}
 	
 	}
 
 	@Override
-	public void registerUser(String login, String password) throws RemoteException {
+	public void registerUser(String login, String password) throws RemoteException, UserException {
 		
 		if (!clientPassword.containsKey(login)) {//if the username does not exist in the hashmap, it is included
 			clientPassword.put(login, password);
+			System.out.println("registration completed Username: " + login + " Password: " + password );
 		}else {//if it already exists prints a message
-			System.out.println("the username "+ login +" is not available ");
+			throw new UserException("the username "+ login +" is not available ");	
 		}
 		
 	}
